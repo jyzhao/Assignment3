@@ -5,21 +5,24 @@
  */
 package Model;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author zhaojiyuan
  */
-public class Patient {
+public class VitalSignHistory {
+    private ArrayList<VitalSign> vitalSignList;
+    
+    
     private String patientName;
-    private String patientID;
+    private int patientID;
     private int age;
     private String primaryDoctorName;
     private String preferredPharmacy;
-   
 
-    public String getPatientName() {
+
+        public String getPatientName() {
         return patientName;
     }
 
@@ -27,11 +30,11 @@ public class Patient {
         this.patientName = patientName;
     }
 
-    public String getPatientID() {
+    public int getPatientID() {
         return patientID;
     }
 
-    public void setPatientID(String patientID) {
+    public void setPatientID(int patientID) {
         this.patientID = patientID;
     }
 
@@ -58,11 +61,27 @@ public class Patient {
     public void setPreferredPharmacy(String preferredPharmacy) {
         this.preferredPharmacy = preferredPharmacy;
     }
-  
-   
-    @Override
-    public String toString() {
-        return patientName;
+    
+    public VitalSignHistory() {
+        vitalSignList = new ArrayList<>();
+        
+    }
+
+    public ArrayList<VitalSign> getVitalSignList() {
+        return vitalSignList;
+    }
+
+    public void setVitalSignList(ArrayList vitalSignList) {
+        this.vitalSignList = vitalSignList;
     }
     
+    public VitalSign addVitalSign() {
+        VitalSign vitalSign = new VitalSign();
+        this.vitalSignList.add(vitalSign);
+        return vitalSign;
+    }
+    
+    public void removeVitalSign(VitalSign vitalSign) {
+        this.vitalSignList.remove(vitalSign);
+    }
 }

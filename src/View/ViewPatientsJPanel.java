@@ -16,19 +16,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author zhaojiyuan
  */
-public class ViewJPanel extends javax.swing.JPanel {
+public class ViewPatientsJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewJPanel
      */
     private JPanel userProcessContainer;
-    private PatientDirectory accountDirectory;
+    private PatientDirectory patientDirectory;
     
     
-    public ViewJPanel(JPanel userProcessContainer, PatientDirectory accountDirectory) {
+    public ViewPatientsJPanel(JPanel userProcessContainer, PatientDirectory patientDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.accountDirectory = accountDirectory;
+        this.patientDirectory = patientDirectory;
         populateTable();
     }
 
@@ -36,13 +36,13 @@ public class ViewJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) viewJTable.getModel();
         model.setRowCount(0);
         
-        for (Patient account : accountDirectory.getPatientDirectory()) {
+        for (Patient patient : patientDirectory.getPatientDirectory()) {
             Object[] object = new Object[5];
-            object[0] = account;
-            object[1] = account.getRoutingNumber();
-            object[2] = account.getAccountNumber();
-            object[3] = account.getBalance();
-            object[4] = account.getCreatedOn();
+            object[0] = patient;
+            object[1] = patient.getPatientID();
+            object[2] = patient.getAge();
+            object[3] = patient.getPrimaryDoctorName();
+            object[4] = patient.getPreferredPharmacy();
             model.addRow(object);
         }
     }
@@ -78,14 +78,14 @@ public class ViewJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Bank Name", "Routing Number", "Account Number", "Balance", "Date"
+                "Patient Name", "Patient ID", "Age", "Primary Doctor Name", "Preferred Pharmacy"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -98,7 +98,7 @@ public class ViewJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(viewJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 72, 528, 84));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 72, 760, 84));
 
         viewAndUpdateJButton.setText("View and Update");
         viewAndUpdateJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -150,9 +150,9 @@ public class ViewJPanel extends javax.swing.JPanel {
             return;
         }
         
-        Patient account = (Patient)viewJTable.getValueAt(selectedRow, 0);
+        Patient patient = (Patient)viewJTable.getValueAt(selectedRow, 0);
         
-        accountDirectory.deleteAccount(account);
+        patientDirectory.deletePatient(patient);
         
         populateTable();
     }//GEN-LAST:event_deleteJButtonActionPerformed
@@ -166,9 +166,9 @@ public class ViewJPanel extends javax.swing.JPanel {
             return;
         }
         
-        Patient account = (Patient)viewJTable.getValueAt(selectedRow, 0);
+        Patient patient = (Patient)viewJTable.getValueAt(selectedRow, 0);
         
-        UpdateJPanel updateJPanel = new UpdateJPanel(userProcessContainer,account);
+        UpdateJPanel updateJPanel = new UpdateJPanel(userProcessContainer,patient);
         userProcessContainer.add("UpdateJPanel",updateJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -183,18 +183,18 @@ public class ViewJPanel extends javax.swing.JPanel {
 
     private void searchJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchJButtonActionPerformed
         // TODO add your handling code here:
-        String accountNumber = searchJTextField.getText();
-        if (accountNumber.equals(null) || accountNumber.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please input a valid account number !!!");
+        String patientID = searchJTextField.getText();
+        if (patientID.equals(null) || patientID.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please input a valid patient ID !!!");
             return;
         }
-        Patient account = accountDirectory.searchUsingAccountNumber(accountNumber);
+        Patient patient = patientDirectory.searchUsingPatientID(patientID);
         
-        if (account == null) {
-            JOptionPane.showMessageDialog(null, "Can not find account number");
+        if (patient == null) {
+            JOptionPane.showMessageDialog(null, "Can not find patient ID");
             return;
         }
-        SearchJPanel searchJPanel = new SearchJPanel(userProcessContainer,account);
+        SearchJPanel searchJPanel = new SearchJPanel(userProcessContainer,patient);
         userProcessContainer.add("SearchJPanel",searchJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

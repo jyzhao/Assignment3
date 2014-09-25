@@ -19,25 +19,27 @@ public class SearchJPanel extends javax.swing.JPanel {
      * Creates new form SearchJPanel
      */
     private JPanel userProcessContainer;
-    private Patient account;
+    private Patient patient;
     
-    public SearchJPanel(JPanel userProcessContainer, Patient account) {
+    public SearchJPanel(JPanel userProcessContainer, Patient patient) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.account = account;
+        this.patient = patient;
         populateFields();
     }
     
     public void populateFields () {
-        bankNameJTextfield.setEnabled(false);
-        accountNumberJTextField.setEnabled(false);
-        routingNumberJTextField.setEnabled(false);
-        balanceJTextField.setEnabled(false);
+        patientNameJTextfield.setEnabled(false);
+        patientIDJTextField.setEnabled(false);
+        ageJTextField.setEnabled(false);
+        primaryDoctorNameJTextField.setEnabled(false);
+        preferredPharmacyJTextField.setEnabled(false);
         
-        bankNameJTextfield.setText(account.getBankName());
-        accountNumberJTextField.setText(account.getAccountNumber());
-        routingNumberJTextField.setText(account.getRoutingNumber());
-        balanceJTextField.setText(String.valueOf(account.getBalance()));
+        patientNameJTextfield.setText(patient.getPatientName());
+        patientIDJTextField.setText(patient.getPatientID());
+        ageJTextField.setText(String.valueOf(patient.getAge()));
+        primaryDoctorNameJTextField.setText(patient.getPrimaryDoctorName());
+        preferredPharmacyJTextField.setText(patient.getPreferredPharmacy());
     }
 
     /**
@@ -49,28 +51,38 @@ public class SearchJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backJButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        patientIDJTextField = new javax.swing.JTextField();
+        preferredPharmacyJTextField = new javax.swing.JTextField();
+        ageJTextField = new javax.swing.JTextField();
+        primaryDoctorNameJTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        bankNameJTextfield = new javax.swing.JTextField();
-        routingNumberJTextField = new javax.swing.JTextField();
-        accountNumberJTextField = new javax.swing.JTextField();
-        balanceJTextField = new javax.swing.JTextField();
-        backJButton = new javax.swing.JButton();
-
-        jLabel2.setText("Bank Name");
-
-        jLabel3.setText("Routing Number");
-
-        jLabel4.setText("Account Number");
-
-        jLabel5.setText("Balance");
+        patientNameJTextfield = new javax.swing.JTextField();
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Preferred Pharmacy");
+
+        jLabel2.setText("Patient Name");
+
+        jLabel3.setText("Patient ID");
+
+        jLabel4.setText("Age");
+
+        jLabel5.setText("Primary Doctor Name");
+
+        patientNameJTextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                patientNameJTextfieldActionPerformed(evt);
             }
         });
 
@@ -81,48 +93,60 @@ public class SearchJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(337, 337, 337)
                 .addComponent(backJButton)
-                .addContainerGap(338, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(178, 178, 178)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel5))
-                    .addGap(168, 168, 168)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(bankNameJTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                        .addComponent(routingNumberJTextField)
-                        .addComponent(accountNumberJTextField)
-                        .addComponent(balanceJTextField))
-                    .addContainerGap(179, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(104, 104, 104)
+                        .addComponent(preferredPharmacyJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addGap(90, 90, 90)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(patientNameJTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(patientIDJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(222, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ageJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(primaryDoctorNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(455, Short.MAX_VALUE)
+                .addGap(112, 112, 112)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(patientNameJTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(patientIDJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(ageJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(primaryDoctorNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(preferredPharmacyJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(108, 108, 108)
                 .addComponent(backJButton)
                 .addGap(39, 39, 39))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(98, 98, 98)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(bankNameJTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(69, 69, 69)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(routingNumberJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(78, 78, 78)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(accountNumberJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(67, 67, 67)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel5)
-                        .addComponent(balanceJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(99, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,16 +157,22 @@ public class SearchJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void patientNameJTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientNameJTextfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_patientNameJTextfieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField accountNumberJTextField;
+    private javax.swing.JTextField ageJTextField;
     private javax.swing.JButton backJButton;
-    private javax.swing.JTextField balanceJTextField;
-    private javax.swing.JTextField bankNameJTextfield;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField routingNumberJTextField;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField patientIDJTextField;
+    private javax.swing.JTextField patientNameJTextfield;
+    private javax.swing.JTextField preferredPharmacyJTextField;
+    private javax.swing.JTextField primaryDoctorNameJTextField;
     // End of variables declaration//GEN-END:variables
 }

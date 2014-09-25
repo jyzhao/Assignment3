@@ -6,7 +6,6 @@
 package Model;
 
 import java.util.ArrayList;
-import Model.Patient;
 /**
  *
  * @author zhaojiyuan
@@ -31,11 +30,11 @@ public class PatientDirectory {
             return patient;
         }
     
-    public void deleteAccount (Patient patient) {
+    public void deletePatient (Patient patient) {
         patientDirectory.remove(patient);
     }
     
-    public Patient searchUsingAccountNumber (String patientID) {
+    public Patient searchUsingPatientID (String patientID) {
         for (Patient account: patientDirectory) {
             if (account.getPatientID().equals(patientID)) {
                 return account;

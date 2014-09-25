@@ -18,11 +18,11 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     
-    private PatientDirectory accountDirectory;
+    private PatientDirectory patientDirectory;
     
     public MainJFrame() {
         initComponents();
-        this.accountDirectory = new PatientDirectory();
+        this.patientDirectory = new PatientDirectory();
     }
 
     /**
@@ -79,8 +79,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void managePatientsJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managePatientsJButtonActionPerformed
         // TODO add your handling code here:
-        ManageAccountJPanel manageAccountJPanel = new ManageAccountJPanel(userProcessContainer,accountDirectory);
-        userProcessContainer.add("ManageAccountJPanel",manageAccountJPanel);
+        ManagePatientsJPanel managePatientsJPanel = new ManagePatientsJPanel(userProcessContainer,patientDirectory);
+        userProcessContainer.add("ManagePatientsJPanel",managePatientsJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_managePatientsJButtonActionPerformed

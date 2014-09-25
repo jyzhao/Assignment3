@@ -11,19 +11,19 @@ import javax.swing.JPanel;
  *
  * @author zhaojiyuan
  */
-public class ManageAccountJPanel extends javax.swing.JPanel {
+public class ManagePatientsJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ManageAccountJPanel
      */
     
     private JPanel userProcessContainer;
-    private PatientDirectory accountDirectory;
+    private PatientDirectory patientDirectory;
     
-    public ManageAccountJPanel(JPanel userProcessContainer,PatientDirectory accountDirectory) {
+    public ManagePatientsJPanel(JPanel userProcessContainer,PatientDirectory patientDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.accountDirectory = accountDirectory;
+        this.patientDirectory = patientDirectory;
     }
 
     /**
@@ -76,8 +76,8 @@ public class ManageAccountJPanel extends javax.swing.JPanel {
 
     private void createPatientsJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPatientsJButtonActionPerformed
         // TODO add your handling code here:
-        CreateAccountJPanel createAccountJPanel = new CreateAccountJPanel(userProcessContainer,accountDirectory);
-        userProcessContainer.add("CreateAccountJPanel",createAccountJPanel);
+        CreatePatientsJPanel createPatientsJPanel = new CreatePatientsJPanel(userProcessContainer,patientDirectory);
+        userProcessContainer.add("CreatePatientsJPanel",createPatientsJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
         
@@ -85,8 +85,8 @@ public class ManageAccountJPanel extends javax.swing.JPanel {
 
     private void viewPatientsJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPatientsJButtonActionPerformed
         // TODO add your handling code here:
-        ViewJPanel viewJPanel = new ViewJPanel(userProcessContainer,accountDirectory);
-        userProcessContainer.add("ViewJPanel",viewJPanel);
+        ViewPatientsJPanel viewPatientsJPanel = new ViewPatientsJPanel(userProcessContainer,patientDirectory);
+        userProcessContainer.add("ViewJPanel",viewPatientsJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_viewPatientsJButtonActionPerformed

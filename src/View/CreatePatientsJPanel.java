@@ -15,19 +15,19 @@ import javax.swing.JPanel;
  *
  * @author zhaojiyuan
  */
-public class CreateAccountJPanel extends javax.swing.JPanel {
+public class CreatePatientsJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form CreateAccountJPanel
      */
     private JPanel userProcessContainer;
-    private PatientDirectory accountDirectory;
+    private PatientDirectory patientDirectory;
     
     
-    public CreateAccountJPanel(JPanel userProcessContainer, PatientDirectory accountDirectory) {
+    public CreatePatientsJPanel(JPanel userProcessContainer, PatientDirectory patientDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.accountDirectory = accountDirectory;
+        this.patientDirectory = patientDirectory;
     }
 
     /**
@@ -149,17 +149,19 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
     private void saveJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveJButtonActionPerformed
         // TODO add your handling code here:
         try{
-        String bankName = patientNameJTextfield.getText();
-        String accountName = ageJTextField.getText();
-        String routingNumber = patientIDJTextField.getText();
-        String accountNumber = ageJTextField.getText();
-        int balance = Integer.parseInt(primaryDoctorNameJTextField.getText());
+        String patientName = patientNameJTextfield.getText();
+        String patientID = patientIDJTextField.getText();
+        int age = Integer.parseInt(ageJTextField.getText());
+        String primaryDoctorName = primaryDoctorNameJTextField.getText();
+        String preferredPharmacy = preferredPharmacyJTextField.getText();
+                
+        Patient patient = patientDirectory.createAndAddAccount();
+        patient.setPatientName(patientName);
+        patient.setPatientID(patientID);
+        patient.setAge(age);
+        patient.setPrimaryDoctorName(primaryDoctorName);
+        patient.setPreferredPharmacy(preferredPharmacy);
         
-        Patient account = accountDirectory.createAndAddAccount();
-        account.setAccountNumber(accountNumber);
-        account.setBalance(balance);
-        account.setBankName(bankName);
-        account.setRoutingNumber(routingNumber);
         } catch(NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please insert a valid value !!!");
         }

@@ -10,7 +10,14 @@ import Model.VitalSign;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -28,9 +35,7 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
     private Boolean isHeartRateNormal = false;
     private Boolean isSystolicBloodPressureNormal = false;
     private Boolean isWeightNormal = false;
-    
-    
-    
+
     public ViewVitalSignJPanel(JPanel userProcessContainer, Patient patient) {
         initComponents();
         this.patient = patient;
@@ -39,13 +44,13 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
     }
 
     public void populateTable() {
-        DefaultTableModel dtm = (DefaultTableModel)vitalSignJTable.getModel();
-        
+        DefaultTableModel dtm = (DefaultTableModel) vitalSignJTable.getModel();
+
         int rowCount = vitalSignJTable.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
             dtm.removeRow(i);
         }
-        
+
         for (VitalSign vitalSign : patient.getVitalSignList()) {
             Object row[] = new Object[5];
             row[0] = vitalSign;
@@ -53,11 +58,11 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
             row[2] = vitalSign.getHeartRate();
             row[3] = vitalSign.getSystolicBloodPressure();
             row[4] = vitalSign.getWeight();
-            
+
             dtm.addRow(row);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,6 +93,7 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
         weightJLabel = new javax.swing.JLabel();
         isVitalSignNormalJLabel = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
+        chartJButton = new javax.swing.JButton();
 
         vitalSignJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,6 +166,13 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
             }
         });
 
+        chartJButton.setText("Chart");
+        chartJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chartJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,15 +180,13 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(444, 444, 444)
-                        .addComponent(deleteVitalSignJButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(isVitalSignNormalJLabel))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(backJButton)
                         .addGap(31, 31, 31)
                         .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -185,22 +196,29 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(viewVitalSignJButton))
-                        .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(respiratoryRateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(heartRateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(systolicBloodPressureJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(weightJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timeAndDateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(respiratoryRateJLabel)
-                            .addComponent(heartRateJLabel)
-                            .addComponent(systolicBloodPressureJLabel)
-                            .addComponent(weightJLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(respiratoryRateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(heartRateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(systolicBloodPressureJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(weightJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(timeAndDateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(deleteVitalSignJButton)
+                                .addGap(71, 71, 71)
+                                .addComponent(chartJButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                .addComponent(respiratoryRateJLabel)
+                                .addComponent(heartRateJLabel)
+                                .addComponent(systolicBloodPressureJLabel)
+                                .addComponent(weightJLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
+                                .addComponent(isVitalSignNormalJLabel)))))
                 .addContainerGap(190, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -216,7 +234,8 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewVitalSignJButton)
                     .addComponent(deleteVitalSignJButton)
-                    .addComponent(isVitalSignNormalJLabel))
+                    .addComponent(isVitalSignNormalJLabel)
+                    .addComponent(chartJButton))
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -256,25 +275,25 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
             systolicBloodPressureJTextField.setText(String.valueOf(vitalSign.getSystolicBloodPressure()));
             weightJTextField.setText(String.valueOf(vitalSign.getWeight()));
             timeAndDateJTextField.setText(String.valueOf(vitalSign.getCreatedOn()));
-           
+
             if (vitalSign.getIsVitalSignNormal()) {
                 isVitalSignNormalJLabel.setText("Normal");
             } else {
                 isVitalSignNormalJLabel.setText("Abnormal");
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Please select vital sign !!!");
         }
-     
+
     }//GEN-LAST:event_viewVitalSignJButtonActionPerformed
 
-    
+
     private void deleteVitalSignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVitalSignJButtonActionPerformed
         // TODO add your handling code here:
         int selectedRow = vitalSignJTable.getSelectedRow();
         if (selectedRow >= 0) {
-            VitalSign vitalSign = (VitalSign)vitalSignJTable.getValueAt(selectedRow, 0);
+            VitalSign vitalSign = (VitalSign) vitalSignJTable.getValueAt(selectedRow, 0);
             this.patient.removeVitalSign(vitalSign);
             populateTable();
         } else {
@@ -293,9 +312,37 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void chartJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chartJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = vitalSignJTable.getSelectedRow();
+        if (selectedRow >= 0) {
+            VitalSign vitalSign = (VitalSign) vitalSignJTable.getValueAt(selectedRow, 0);
+
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            dataset.setValue(vitalSign.getRespiratoryRate(), "", "Respiratory Rate");
+            dataset.setValue(vitalSign.getHeartRate(), "", "Heart Rate");
+            dataset.setValue(vitalSign.getSystolicBloodPressure(), "", "Systolic Blood Pressure");
+            dataset.setValue(vitalSign.getWeight(), "", "Weight");
+
+            JFreeChart chart = ChartFactory.createBarChart("Vital Sign", "", "", dataset, PlotOrientation.VERTICAL, false, false, false);
+            CategoryPlot categoryPlot = chart.getCategoryPlot();
+            categoryPlot.setRangeGridlinePaint(Color.BLACK);
+
+            ChartFrame chartFrame = new ChartFrame("Bar Chart for Vital Sign", chart);
+            chartFrame.setVisible(true);
+            chartFrame.setSize(500, 500);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select vital sign !!!");
+        }
+
+
+    }//GEN-LAST:event_chartJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
+    private javax.swing.JButton chartJButton;
     private javax.swing.JButton deleteVitalSignJButton;
     private javax.swing.JLabel heartRateJLabel;
     private javax.swing.JTextField heartRateJTextField;

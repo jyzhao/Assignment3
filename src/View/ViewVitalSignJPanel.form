@@ -19,18 +19,16 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="444" max="-2" attributes="0"/>
-                      <Component id="deleteVitalSignJButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="isVitalSignNormalJLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                       <Component id="backJButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="674" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -40,25 +38,36 @@
                           <Component id="jLabel6" alignment="2" min="-2" max="-2" attributes="0"/>
                           <Component id="viewVitalSignJButton" alignment="2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="respiratoryRateJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="heartRateJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="systolicBloodPressureJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="weightJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="timeAndDateJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="respiratoryRateJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                                  <Component id="heartRateJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                                  <Component id="systolicBloodPressureJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                                  <Component id="weightJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                                  <Component id="timeAndDateJTextField" alignment="0" min="-2" pref="147" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="deleteVitalSignJButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                              <Component id="chartJButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="2" attributes="0">
-                          <Component id="respiratoryRateJLabel" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="heartRateJLabel" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="systolicBloodPressureJLabel" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="weightJLabel" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="2" attributes="0">
+                              <Component id="respiratoryRateJLabel" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="heartRateJLabel" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="systolicBloodPressureJLabel" alignment="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="weightJLabel" alignment="2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                              <Component id="isVitalSignNormalJLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="674" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="190" max="32767" attributes="0"/>
@@ -80,6 +89,7 @@
                   <Component id="viewVitalSignJButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="deleteVitalSignJButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="isVitalSignNormalJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="chartJButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -245,6 +255,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backJButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="chartJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Chart"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chartJButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

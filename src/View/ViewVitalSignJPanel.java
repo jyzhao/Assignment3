@@ -330,7 +330,7 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
 
             ChartFrame chartFrame = new ChartFrame("Bar Chart for Vital Sign", chart);
             chartFrame.setVisible(true);
-            chartFrame.setSize(500, 500);
+            chartFrame.setSize(900, 600);
 
         } else {
             JOptionPane.showMessageDialog(null, "Please select vital sign !!!");

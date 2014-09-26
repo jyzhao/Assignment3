@@ -5,9 +5,12 @@
  */
 package View;
 
+import Model.Patient;
 import Model.VitalSign;
-import Model.VitalSignHistory;
+import java.awt.CardLayout;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,12 +21,15 @@ public class CreateVitalSignJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateVitalSignJPanel
      */
-    private VitalSignHistory vitalSignHistory;
+    private JPanel userProcessContainer;
+
+    private Patient patient;
     private Boolean isVitalSignNormal;
-    
-    public CreateVitalSignJPanel(VitalSignHistory vitalSignHistory) {
+
+    public CreateVitalSignJPanel(JPanel userProcessContainer, Patient patient) {
         initComponents();
-        this.vitalSignHistory = vitalSignHistory;
+        this.userProcessContainer = userProcessContainer;
+        this.patient = patient;
     }
 
     /**
@@ -45,8 +51,7 @@ public class CreateVitalSignJPanel extends javax.swing.JPanel {
         weightJTextField = new javax.swing.JTextField();
         respiratoryRateJTextField = new javax.swing.JTextField();
         createVitalSignJButton = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        timeAndDateJTextField = new javax.swing.JTextField();
+        backJButton = new javax.swing.JButton();
 
         jLabel1.setText("Create Vital Sign");
 
@@ -65,16 +70,20 @@ public class CreateVitalSignJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setText("Time and Date");
+        backJButton.setText("<<Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(143, 143, 143)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel6)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
@@ -84,23 +93,27 @@ public class CreateVitalSignJPanel extends javax.swing.JPanel {
                     .addComponent(heartRateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(systolicBloodPressureJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(weightJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(respiratoryRateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timeAndDateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(respiratoryRateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(134, 134, 134))
             .addGroup(layout.createSequentialGroup()
-                .addGap(284, 284, 284)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(backJButton)
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(createVitalSignJButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createVitalSignJButton)
-                .addGap(271, 271, 271))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(backJButton))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
@@ -120,13 +133,9 @@ public class CreateVitalSignJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(weightJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(timeAndDateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(createVitalSignJButton)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -137,57 +146,63 @@ public class CreateVitalSignJPanel extends javax.swing.JPanel {
             float heartRate = Float.parseFloat(heartRateJTextField.getText());
             float systolicBloodPressure = Float.parseFloat(systolicBloodPressureJTextField.getText());
             float weight = Float.parseFloat(weightJTextField.getText());
-            String timeAndDate = timeAndDateJTextField.getText();
+            Date createdOn = new Date();
             
-            VitalSign vitalSign = this.vitalSignHistory.addVitalSign();
+            VitalSign vitalSign = this.patient.addVitalSign();
 
             vitalSign.setRespiratoryRate(respiratoryRate);
             vitalSign.setHeartRate(heartRate);
             vitalSign.setSystolicBloodPressure(systolicBloodPressure);
             vitalSign.setWeight(weight);
-            vitalSign.setTimeAndDate(timeAndDate);
-        
-            if (vitalSignHistory.getAge() >= 1 && vitalSignHistory.getAge() <= 3) { //toddler
-                isVitalSignNormal = (vitalSign.getRespiratoryRate() >= 20 && vitalSign.getRespiratoryRate() <= 30) &&
-                                    (vitalSign.getHeartRate() >= 80 && vitalSign.getHeartRate() <= 130) &&
-                                    (vitalSign.getSystolicBloodPressure() >= 80 && vitalSign.getSystolicBloodPressure() <= 110) &&
-                                    (vitalSign.getWeight() >= 22 && vitalSign.getWeight() <= 31);
-                
-            } else if (vitalSignHistory.getAge() >= 4 && vitalSignHistory.getAge() <= 5) {  //preschooler
-                isVitalSignNormal = (vitalSign.getRespiratoryRate() >= 20 && vitalSign.getRespiratoryRate() <= 30) &&
-                                    (vitalSign.getHeartRate() >= 80 && vitalSign.getHeartRate() <= 120) &&
-                                    (vitalSign.getSystolicBloodPressure() >= 80 && vitalSign.getSystolicBloodPressure() <= 110) &&
-                                    (vitalSign.getWeight() >= 31 && vitalSign.getWeight() <= 40);
-                
-            } else if (vitalSignHistory.getAge() >= 6 && vitalSignHistory.getAge() <= 12) {  //school age
-                isVitalSignNormal = (vitalSign.getRespiratoryRate() >= 20 && vitalSign.getRespiratoryRate() <= 30) &&
-                                    (vitalSign.getHeartRate() >= 70 && vitalSign.getHeartRate() <= 110) &&
-                                    (vitalSign.getSystolicBloodPressure() >= 80 && vitalSign.getSystolicBloodPressure() <= 120) &&
-                                    (vitalSign.getWeight() >= 41 && vitalSign.getWeight() <= 92);
-                
-            } else if (vitalSignHistory.getAge() >= 13) {  //adolescent
-                isVitalSignNormal = (vitalSign.getRespiratoryRate() >= 12 && vitalSign.getRespiratoryRate() <= 20) &&
-                                    (vitalSign.getHeartRate() >= 55 && vitalSign.getHeartRate() <= 105) &&
-                                    (vitalSign.getSystolicBloodPressure() >= 110 && vitalSign.getSystolicBloodPressure() <= 120) &&
-                                    (vitalSign.getWeight() >= 110);
-                
+            vitalSign.setCreatedOn(createdOn);
+
+            if (patient.getAge() >= 1 && patient.getAge() <= 3) { //toddler
+                isVitalSignNormal = (vitalSign.getRespiratoryRate() >= 20 && vitalSign.getRespiratoryRate() <= 30)
+                        && (vitalSign.getHeartRate() >= 80 && vitalSign.getHeartRate() <= 130)
+                        && (vitalSign.getSystolicBloodPressure() >= 80 && vitalSign.getSystolicBloodPressure() <= 110)
+                        && (vitalSign.getWeight() >= 22 && vitalSign.getWeight() <= 31);
+
+            } else if (patient.getAge() >= 4 && patient.getAge() <= 5) {  //preschooler
+                isVitalSignNormal = (vitalSign.getRespiratoryRate() >= 20 && vitalSign.getRespiratoryRate() <= 30)
+                        && (vitalSign.getHeartRate() >= 80 && vitalSign.getHeartRate() <= 120)
+                        && (vitalSign.getSystolicBloodPressure() >= 80 && vitalSign.getSystolicBloodPressure() <= 110)
+                        && (vitalSign.getWeight() >= 31 && vitalSign.getWeight() <= 40);
+
+            } else if (patient.getAge() >= 6 && patient.getAge() <= 12) {  //school age
+                isVitalSignNormal = (vitalSign.getRespiratoryRate() >= 20 && vitalSign.getRespiratoryRate() <= 30)
+                        && (vitalSign.getHeartRate() >= 70 && vitalSign.getHeartRate() <= 110)
+                        && (vitalSign.getSystolicBloodPressure() >= 80 && vitalSign.getSystolicBloodPressure() <= 120)
+                        && (vitalSign.getWeight() >= 41 && vitalSign.getWeight() <= 92);
+
+            } else if (patient.getAge() >= 13) {  //adolescent
+                isVitalSignNormal = (vitalSign.getRespiratoryRate() >= 12 && vitalSign.getRespiratoryRate() <= 20)
+                        && (vitalSign.getHeartRate() >= 55 && vitalSign.getHeartRate() <= 105)
+                        && (vitalSign.getSystolicBloodPressure() >= 110 && vitalSign.getSystolicBloodPressure() <= 120)
+                        && (vitalSign.getWeight() >= 110);
+
             } else {
                 JOptionPane.showMessageDialog(null, "Please enter a valid age !!!");
             }
-            
-            vitalSign.setIsVitalSignNormal(isVitalSignNormal);
-            
-        } catch (IllegalArgumentException e) {
-               JOptionPane.showMessageDialog(null, "Please enter a valid value !!!");
-        }
-        
-        
 
-        
+            vitalSign.setIsVitalSignNormal(isVitalSignNormal);
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid value !!!");
+        }
+
+
     }//GEN-LAST:event_createVitalSignJButtonActionPerformed
+
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backJButton;
     private javax.swing.JButton createVitalSignJButton;
     private javax.swing.JTextField heartRateJTextField;
     private javax.swing.JLabel jLabel1;
@@ -195,10 +210,8 @@ public class CreateVitalSignJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField respiratoryRateJTextField;
     private javax.swing.JTextField systolicBloodPressureJTextField;
-    private javax.swing.JTextField timeAndDateJTextField;
     private javax.swing.JTextField weightJTextField;
     // End of variables declaration//GEN-END:variables
 }

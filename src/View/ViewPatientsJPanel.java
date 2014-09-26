@@ -67,7 +67,7 @@ public class ViewPatientsJPanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("View Account Details");
+        jLabel1.setText("View All Patients");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 39, -1, -1));
 
         viewJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -98,7 +98,7 @@ public class ViewPatientsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(viewJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 72, 760, 84));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 760, 110));
 
         viewAndUpdateJButton.setText("View and Update");
         viewAndUpdateJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +106,7 @@ public class ViewPatientsJPanel extends javax.swing.JPanel {
                 viewAndUpdateJButtonActionPerformed(evt);
             }
         });
-        add(viewAndUpdateJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 213, -1, -1));
+        add(viewAndUpdateJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +114,7 @@ public class ViewPatientsJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 213, -1, -1));
+        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, -1, -1));
 
         deleteJButton.setText("Delete");
         deleteJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -122,16 +122,16 @@ public class ViewPatientsJPanel extends javax.swing.JPanel {
                 deleteJButtonActionPerformed(evt);
             }
         });
-        add(deleteJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 213, -1, -1));
+        add(deleteJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 230, -1, -1));
 
-        searchJButton.setText("Search using Account Number");
+        searchJButton.setText("Search using Patient ID");
         searchJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchJButtonActionPerformed(evt);
             }
         });
-        add(searchJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 293, -1, -1));
-        add(searchJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 292, 210, -1));
+        add(searchJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, -1, -1));
+        add(searchJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 210, -1));
 
         backJButton.setText("<<Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +139,7 @@ public class ViewPatientsJPanel extends javax.swing.JPanel {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 371, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed

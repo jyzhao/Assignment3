@@ -37,6 +37,7 @@ public class ManagePatientsJPanel extends javax.swing.JPanel {
 
         createPatientsJButton = new javax.swing.JButton();
         viewPatientsJButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         createPatientsJButton.setText("Create Patients");
         createPatientsJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -52,6 +53,8 @@ public class ManagePatientsJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setText("Manage Patients");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,15 +65,21 @@ public class ManagePatientsJPanel extends javax.swing.JPanel {
                     .addComponent(viewPatientsJButton)
                     .addComponent(createPatientsJButton))
                 .addGap(346, 346, 346))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(329, 329, 329)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addGap(67, 67, 67)
                 .addComponent(createPatientsJButton)
-                .addGap(113, 113, 113)
+                .addGap(90, 90, 90)
                 .addComponent(viewPatientsJButton)
-                .addContainerGap(288, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -94,6 +103,7 @@ public class ManagePatientsJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createPatientsJButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton viewPatientsJButton;
     // End of variables declaration//GEN-END:variables
 }

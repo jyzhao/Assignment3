@@ -5,10 +5,12 @@
  */
 package View;
 
+import Model.Patient;
 import Model.VitalSign;
-import Model.VitalSignHistory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,7 +21,9 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewVitalSignJPanel
      */
-    private VitalSignHistory vitalSignHistory;
+    private JPanel userProcessContainer;
+
+    private Patient patient;
     private Boolean isRespiratoryRateNormal = false;
     private Boolean isHeartRateNormal = false;
     private Boolean isSystolicBloodPressureNormal = false;
@@ -27,10 +31,10 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
     
     
     
-    public ViewVitalSignJPanel(VitalSignHistory vitalSignHistory) {
+    public ViewVitalSignJPanel(JPanel userProcessContainer, Patient patient) {
         initComponents();
-        this.vitalSignHistory = vitalSignHistory;
-        
+        this.patient = patient;
+        this.userProcessContainer = userProcessContainer;
         populateTable();
     }
 
@@ -42,7 +46,7 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
             dtm.removeRow(i);
         }
         
-        for (VitalSign vitalSign : vitalSignHistory.getVitalSignList()) {
+        for (VitalSign vitalSign : patient.getVitalSignList()) {
             Object row[] = new Object[5];
             row[0] = vitalSign;
             row[1] = vitalSign.getRespiratoryRate();
@@ -83,6 +87,7 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
         systolicBloodPressureJLabel = new javax.swing.JLabel();
         weightJLabel = new javax.swing.JLabel();
         isVitalSignNormalJLabel = new javax.swing.JLabel();
+        backJButton = new javax.swing.JButton();
 
         vitalSignJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,6 +147,19 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Time and Date");
 
+        timeAndDateJTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeAndDateJTextFieldActionPerformed(evt);
+            }
+        });
+
+        backJButton.setText("<<Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,14 +167,14 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(viewVitalSignJButton)
-                        .addGap(108, 108, 108)
+                        .addGap(444, 444, 444)
                         .addComponent(deleteVitalSignJButton)
-                        .addGap(117, 117, 117)
+                        .addGap(18, 18, 18)
                         .addComponent(isVitalSignNormalJLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
+                        .addGap(106, 106, 106)
+                        .addComponent(backJButton)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
@@ -165,7 +183,8 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6)
+                            .addComponent(viewVitalSignJButton))
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(respiratoryRateJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,17 +198,21 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
                             .addComponent(heartRateJLabel)
                             .addComponent(systolicBloodPressureJLabel)
                             .addComponent(weightJLabel)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(230, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(backJButton))
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewVitalSignJButton)
                     .addComponent(deleteVitalSignJButton)
@@ -229,10 +252,10 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
             VitalSign vitalSign = (VitalSign) vitalSignJTable.getValueAt(selectedRow, 0);
 
             respiratoryRateJTextField.setText(String.valueOf(vitalSign.getRespiratoryRate()));
-            heartRateJTextField.setText(String.valueOf(vitalSign.getRespiratoryRate()));
+            heartRateJTextField.setText(String.valueOf(vitalSign.getHeartRate()));
             systolicBloodPressureJTextField.setText(String.valueOf(vitalSign.getSystolicBloodPressure()));
             weightJTextField.setText(String.valueOf(vitalSign.getWeight()));
-            timeAndDateJTextField.setText(String.valueOf(vitalSign.getTimeAndDate()));
+            timeAndDateJTextField.setText(String.valueOf(vitalSign.getCreatedOn()));
            
             if (vitalSign.getIsVitalSignNormal()) {
                 isVitalSignNormalJLabel.setText("Normal");
@@ -252,15 +275,27 @@ public class ViewVitalSignJPanel extends javax.swing.JPanel {
         int selectedRow = vitalSignJTable.getSelectedRow();
         if (selectedRow >= 0) {
             VitalSign vitalSign = (VitalSign)vitalSignJTable.getValueAt(selectedRow, 0);
-            this.vitalSignHistory.removeVitalSign(vitalSign);
+            this.patient.removeVitalSign(vitalSign);
             populateTable();
         } else {
             JOptionPane.showMessageDialog(null, "Please select vital sign !!!");
         }
     }//GEN-LAST:event_deleteVitalSignJButtonActionPerformed
 
+    private void timeAndDateJTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeAndDateJTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_timeAndDateJTextFieldActionPerformed
+
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backJButton;
     private javax.swing.JButton deleteVitalSignJButton;
     private javax.swing.JLabel heartRateJLabel;
     private javax.swing.JTextField heartRateJTextField;

@@ -69,7 +69,7 @@ public class VitalSign {
     
     @Override
     public String toString() {
-        return String.valueOf(getCreatedOn());
+        return getCreatedOn().toString();
     }
 
 

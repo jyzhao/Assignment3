@@ -6,12 +6,16 @@
 package Model;
 
 import java.util.Date;
+import java.util.ArrayList;
+
 
 /**
  *
  * @author zhaojiyuan
  */
 public class Patient {
+    private ArrayList<VitalSign> vitalSignList;
+
     private String patientName;
     private String patientID;
     private int age;
@@ -59,6 +63,28 @@ public class Patient {
         this.preferredPharmacy = preferredPharmacy;
     }
   
+    public Patient() {
+        vitalSignList = new ArrayList<>();
+        
+    }
+
+    public ArrayList<VitalSign> getVitalSignList() {
+        return vitalSignList;
+    }
+
+    public void setVitalSignList(ArrayList vitalSignList) {
+        this.vitalSignList = vitalSignList;
+    }
+    
+    public VitalSign addVitalSign() {
+        VitalSign vitalSign = new VitalSign();
+        this.vitalSignList.add(vitalSign);
+        return vitalSign;
+    }
+    
+    public void removeVitalSign(VitalSign vitalSign) {
+        this.vitalSignList.remove(vitalSign);
+    }
    
     @Override
     public String toString() {
